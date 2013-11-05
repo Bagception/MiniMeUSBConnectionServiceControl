@@ -12,20 +12,20 @@ import de.philipphock.android.lib.services.ServiceUtil;
 import de.philipphock.android.lib.services.observation.ServiceObservationActor;
 import de.philipphock.android.lib.services.observation.ServiceObservationReactor;
 import de.uniulm.bagception.broadcastconstants.BagceptionBroadcastContants;
-import de.uniulm.bagception.service.USBConnectionServiceRemote;
+import de.uniulm.bagception.services.ServiceNames;
 
 public class MiniMeUSBConnectionServiceControl extends Activity implements ServiceObservationReactor, USBConnectionReactor{
 
 	private boolean serviceOnline = false;
 	private ServiceObservationActor observationActor;
 	private USBConnectionActor usbConnectionActor;
-	public static final String SERVICE_NAME = "de.uniulm.bagception.rfidapi.miniusbconnectionservice.service.USBConnectionService";
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mini_me_usbconnection_service_control);
-		observationActor = new ServiceObservationActor(this,SERVICE_NAME);
+		observationActor = new ServiceObservationActor(this,ServiceNames.RFID_SERVICE);
 		usbConnectionActor = new USBConnectionActor(this);
 	}
 
@@ -34,14 +34,14 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 	@Override
 	protected void onResume() {
 		super.onResume();
-		onServiceStopped(SERVICE_NAME);
+		onServiceStopped(ServiceNames.RFID_SERVICE);
 		observationActor.register(this);
 		usbConnectionActor.register(this);
-		ServiceUtil.requestStatusForServiceObservable(this, SERVICE_NAME);
+		ServiceUtil.requestStatusForServiceObservable(this, ServiceNames.RFID_SERVICE);
 		
 		sendRescanBroadcast();
 		
-		Intent startServiceIntent = new Intent(USBConnectionServiceRemote.class.getName());
+		Intent startServiceIntent = new Intent(ServiceNames.RFID_SERVICE);
 		startService(startServiceIntent);	
 		
 		
@@ -101,10 +101,10 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 		startStopBtn.setEnabled(false);
 		
 		if (!serviceOnline){
-			Intent startServiceIntent = new Intent(USBConnectionServiceRemote.class.getName());
+			Intent startServiceIntent = new Intent(ServiceNames.RFID_SERVICE);
 			startService(startServiceIntent);	
 		}else{
-			Intent startServiceIntent = new Intent(USBConnectionServiceRemote.class.getName());
+			Intent startServiceIntent = new Intent(ServiceNames.RFID_SERVICE);
 			stopService(startServiceIntent);
 		}
 	}
