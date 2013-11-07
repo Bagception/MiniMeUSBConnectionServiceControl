@@ -3,6 +3,8 @@ package de.uniulm.bagception.minimeusbconnectionservicecontrol;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -103,6 +105,7 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 	public void onScanButtonClick(View v){
 		Intent i = new Intent();
 		i.setAction(USB_CONNECTION_BROADCAST_RFIDSCAN);
+		
 		sendBroadcast(i);
 	}
 	
