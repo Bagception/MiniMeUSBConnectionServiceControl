@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import de.philipphock.android.lib.logging.LOG;
 import de.philipphock.android.lib.services.ServiceUtil;
 import de.philipphock.android.lib.services.observation.ServiceObservationActor;
 import de.philipphock.android.lib.services.observation.ServiceObservationReactor;
@@ -100,7 +101,6 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 	}
 	
 	public void onScanButtonClick(View v){
-		Log.d("RFID","br for rfid scan send");
 		Intent i = new Intent();
 		i.setAction(USB_CONNECTION_BROADCAST_RFIDSCAN);
 		sendBroadcast(i);
@@ -133,7 +133,6 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 	@Override
 	public void onUSBDisconnected() {
 		TextView v = (TextView) findViewById(R.id.usbStatus);
-
 		v.setText("disconnected");
 		v.setTextColor(Color.RED);
 	}

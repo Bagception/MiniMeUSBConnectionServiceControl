@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import de.philipphock.android.lib.BroadcastActor;
+import de.philipphock.android.lib.logging.LOG;
 import de.uniulm.bagception.broadcastconstants.BagceptionBroadcastContants;
 
 /**
@@ -30,6 +31,7 @@ public class USBConnectionActor extends BroadcastActor<USBConnectionReactor>{
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		LOG.out(this, "RECV BROADCAST");
 		if (BagceptionBroadcastContants.USB_CONNECTION_BROADCAST_CONNECTED.equals(intent.getAction())){
 			reactor.onUSBConnected();
 		} else if (BagceptionBroadcastContants.USB_CONNECTION_BROADCAST_DISCONNECTED.equals(intent.getAction())){
