@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 	private boolean serviceOnline = false;
 	private ServiceObservationActor observationActor;
 	private USBConnectionActor usbConnectionActor;
+	public static final String USB_CONNECTION_BROADCAST_RFIDSCAN = "de.uniulm.bagception.service.broadcast.usbconnection.rfidscan";
+
 	
 
 	@Override
@@ -94,6 +97,13 @@ public class MiniMeUSBConnectionServiceControl extends Activity implements Servi
 		TextView v = (TextView) findViewById(R.id.usbStatus);
 		v.setText("unknown");
 		v.setTextColor(Color.BLUE);
+	}
+	
+	public void onScanButtonClick(View v){
+		Log.d("RFID","br for rfid scan send");
+		Intent i = new Intent();
+		i.setAction(USB_CONNECTION_BROADCAST_RFIDSCAN);
+		sendBroadcast(i);
 	}
 	
 	public void onStartStopService(View v){

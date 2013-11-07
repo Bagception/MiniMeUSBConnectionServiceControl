@@ -56,4 +56,14 @@
         android:layout_alignLeft="@+id/serviceStatus"
         android:text="unknown" />
 
+    <Button
+        android:id="@+id/scanBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onScanButtonClick"
+        android:layout_alignLeft="@+id/startStopService"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="89dp"
+        android:text="Button" />
+
 </RelativeLayout>
